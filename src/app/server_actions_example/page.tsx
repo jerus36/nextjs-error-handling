@@ -1,28 +1,26 @@
 'use client'
 import { generateError } from '@/app/lib/actions'
-import { Card, Paper, Typography } from '@mui/material';
+import Button from '@mui/material/Button';
 import { use, useEffect, useState } from 'react';
 export default function Home() {
   const [error, setError] = useState<any>(null);
-
-  async function handleClick() {
+  
+  async function handleClick(){
     try {
       await generateError("Root Page Error")
-    } catch (e) {
+    } catch(e) {
       setError(e);
     }
   }
   useEffect(() => {
-    if (error) {
+    if(error){
       throw error
     }
   }, [error])
   return (
-    <>
-      <Paper sx={{ width: '50%', alignSelf: "center" }}>
-        <h1>Hello, Here are some error handling examples.</h1>
-        <Typography>Click an example in the menu to see it work.</Typography>
-      </Paper>
-    </>
+    <main>
+      <h1>Sample Server Actions Error Bubble</h1>
+      <Button variant="contained" onClick={handleClick}>Test Error Bubble</Button>
+    </main>
   );
 }
